@@ -1,0 +1,39 @@
+# Hardcoded stock prices
+stock_prices = {
+    "AAPL": 180,
+    "TSLA": 250,
+    "GOOGL": 150,
+    "MSFT": 420,
+    "AMZN": 190
+}
+
+total_investment = 0
+result_text = "STOCK INVESTMENT REPORT\n\n"
+
+num_stocks = int(input("How many stocks do you want to enter? "))
+
+for i in range(num_stocks):
+    stock_name = input("\nEnter stock name (AAPL, TSLA, GOOGL, MSFT, AMZN): ").upper()
+    quantity = int(input("Enter quantity: "))
+
+    if stock_name in stock_prices:
+        investment = stock_prices[stock_name] * quantity
+        total_investment += investment
+
+        result_text += (
+            f"{stock_name} - Quantity: {quantity}, "
+            f"Price: ${stock_prices[stock_name]}, "
+            f"Value: ${investment}\n"
+        )
+    else:
+        print("Stock not found!")
+
+result_text += f"\nTotal Investment Value = ${total_investment}"
+
+print("\n" + result_text)
+
+# Save to text file
+with open("investment_report.txt", "w") as file:
+    file.write(result_text)
+
+print("\nReport saved as investment_report.txt")
