@@ -1,0 +1,48 @@
+import random
+
+# List of predefined words
+words = ["apple", "banana", "mango", "grapes", "orange"]
+
+# Select a random word
+word = random.choice(words)
+
+# Create blanks for the word
+guessed_word = ["_"] * len(word)
+
+# Store guessed letters
+guessed_letters = []
+
+# Maximum incorrect guesses
+max_attempts = 6
+wrong_guesses = 0
+
+print("=== HANGMAN GAME ===")
+
+while wrong_guesses < max_attempts and "_" in guessed_word:
+    print("\nWord:", " ".join(guessed_word))
+    print("Wrong guesses left:", max_attempts - wrong_guesses)
+
+    guess = input("Enter a letter: ").lower()
+
+    if guess in guessed_letters:
+        print("You already guessed that letter!")
+        continue
+
+    guessed_letters.append(guess)
+
+    if guess in word:
+        print("Correct guess!")
+
+        for i in range(len(word)):
+            if word[i] == guess:
+                guessed_word[i] = guess
+    else:
+        print("Wrong guess!")
+        wrong_guesses += 1
+
+# Game result
+if "_" not in guessed_word:
+    print("\nCongratulations! You guessed the word:", word)
+else:
+    print("\nGame Over!")
+    print("The word was:", word)
